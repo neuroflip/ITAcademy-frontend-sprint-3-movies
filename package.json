@@ -4,28 +4,15 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll --verbose=false"
+    "test": "vitest",
+    "test:watch": "vitest --reporter:html --ui --watch",
+    "viewTest": "vite preview --outDir html"
+
   },
   "devDependencies": {
-    "jest": "^29.2.2",
-    "jest-html-reporter": "^3.7.0",
-    "jest-junit": "^14.0.1"
-  },
-  "jest": {
-    "reporters": [
-      "default",
-      [
-        "./node_modules/jest-html-reporter",
-        {
-          "pageTitle": "Test Solution",
-          "outputPath": "test-results.html",
-          "includeFailureMsg": true,
-          "includeConsoleLog": true
-        }
-      ],
-      "jest-junit"
-    ]
+    "@vitest/ui": "^4.0.3",
+    "jest-junit": "^14.0.1",
+    "vitest": "^4.0.3"
   },
   "jest-junit": {
     "suiteNameTemplate": "{filepath}",

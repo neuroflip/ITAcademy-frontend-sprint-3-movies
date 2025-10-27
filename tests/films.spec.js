@@ -1,14 +1,24 @@
-const movies = require('../src/data');
-const {
-  getAllDirectors,
-  getMoviesFromDirector,
-  moviesAverageOfDirector,
-  orderAlphabetically,
-  orderByYear,
-  moviesAverageByCategory,
-  hoursToMinutes,
-  bestFilmOfYear,
-} = require('../src/films');
+import { describe, it, expect } from 'vitest';
+import { getAllDirectors, getMoviesFromDirector, moviesAverageOfDirector, orderAlphabetically,
+  orderByYear, moviesAverageByCategory, hoursToMinutes, bestFilmOfYear } from '../src/films';
+
+import movies from '../src/data.js';
+import ex1MoviesTestData from './data/ex1MoviesTestData.js';
+import ex1ResultMoviesTotalDirectors from './data/ex1MoviesTestData.result.js';
+import ex2MoviesFromDirector from './data/ex2MoviesFromDirector.js';
+import ex2ResultMoviesFromDirector from './data/ex2MoviesFromDirector.result.js';
+import ex2ResultMoviesTotalFromDirector from './data/ex2MoviesTotalFromDirector.result.js';
+import ex3MoviesAverageFromDirector from './data/ex3MoviesAverageFromDirector.js'
+import ex4AlphabeticalOrder from './data/ex4AlphabeticalOrder.js';
+import ex4ResultAlphabeticalOrder from './data/ex4AlphabeticalOrder.result.js';
+import ex4AlphabeticalOrderTop20 from './data/ex4AlphabeticalOrderTop20.js';
+import ex4ResultAlphabeticalOrderTop20 from './data/ex4AlphabeticalOrderTop20.result.js';
+import ex5OrderByYear from './data/ex5OrderByYear.js';
+import ex5ResultOrderByYear from './data/ex5OrderByYear.result.js';
+import ex8BestFiltOfYear from './data/ex8BestFiltOfYear.js';
+import ex8ResultBestFiltOfYear from './data/ex8BestFilmOfYear.result.js';
+import ex7HoursToTime from './data/ex7HoursToTimeWithInvalidDuration.js';
+import ex7ResultHoursToTime from './data/ex7HoursToTimeWithInvalidDuration.result.js';
 
 // Exercise 1
 describe('Function "getAllDirectors"', () => {
@@ -25,28 +35,14 @@ describe('Function "getAllDirectors"', () => {
   });
 
   it('should return a new array with the same length as the original one', () => {
-    const testArr = [
-      {
-        title: 'Paths of Glory',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Django Unchained',
-        year: 2012,
-        director: 'Quentin Tarantino',
-        duration: '2h 45min',
-        genre: ['Drama', 'Western'],
-        score: 8.4
-      }
-    ];
-    expect(getAllDirectors(testArr)).toEqual([
+    expect(getAllDirectors(ex1MoviesTestData)).toEqual([
       'Stanley Kubrick',
       'Quentin Tarantino'
     ]);
+  });
+
+  it('should return all the directors from the full movies data', () => {
+    expect(getAllDirectors(movies)).toEqual(ex1ResultMoviesTotalDirectors);
   });
 });
 
@@ -65,36 +61,12 @@ describe('Function "getMoviesFromDirector"', () => {
   });
 
   it('should return a new array with the movies from director', () => {
-    const testArr = [
-      {
-        title: 'Paths of Glory',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Django Unchained',
-        year: 2012,
-        director: 'Quentin Tarantino',
-        duration: '2h 45min',
-        genre: ['Drama', 'Western'],
-        score: 8.4
-      }
-    ];
-    expect(getMoviesFromDirector(testArr, 'Quentin Tarantino')).toEqual([
-      {
-        title: 'Django Unchained',
-        year: 2012,
-        director: 'Quentin Tarantino',
-        duration: '2h 45min',
-        genre: ['Drama', 'Western'],
-        score: 8.4
-      }
-    ]);
+    expect(getMoviesFromDirector(ex2MoviesFromDirector, 'Quentin Tarantino')).toEqual(ex2ResultMoviesFromDirector);
   });
 
+  it('shold return a new array with the movies from a director from the original data array', () => {
+    expect(getMoviesFromDirector(movies, 'Steven Spielberg')).toEqual(ex2ResultMoviesTotalFromDirector);
+  });
 });
 
 // Exercise 3
@@ -112,34 +84,12 @@ describe('Function "moviesAverageOfDirector"', () => {
   });
 
   it(' should return the average score of movies selecting only the director films. With 2 decimals! ', () => {
-    expect(moviesAverageOfDirector([
-      {
-        title: 'Paths of Glory',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Django Unchained',
-        year: 2012,
-        director: 'Quentin Tarantino',
-        duration: '2h 45min',
-        genre: ['Drama', 'Western'],
-        score: 8.4
-      },
-      {
-        title: 'Pulp Fiction',
-        year: 1994,
-        director: 'Quentin Tarantino',
-        duration: '2h 34min',
-        genre: ['Crime', 'Drama'],
-        score: 8.9
-      }
-    ], 'Quentin Tarantino')).toBe(8.65);
+    expect(moviesAverageOfDirector(ex3MoviesAverageFromDirector, 'Quentin Tarantino')).toBe(8.65);
   });
 
+  it(' should return the average score of movies selecting only the director films from original movies data ', () => {
+    expect(moviesAverageOfDirector(movies, 'Steven Spielberg')).toBe(8.36);
+  });
 });
 
 // Exercise 4
@@ -168,85 +118,11 @@ describe('Function "orderAlphabetically"', () => {
   });
 
   it('should order them alphabetically.', () => {
-    const moviesArr = [
-      { title: 'aab' },
-      { title: 'aaa' },
-      { title: 'abc' },
-      { title: 'acb' },
-      { title: 'abb' }
-    ];
-
-    expect(orderAlphabetically(moviesArr)).toEqual([
-      'aaa',
-      'aab',
-      'abb',
-      'abc',
-      'acb'
-    ]);
+    expect(orderAlphabetically(ex4AlphabeticalOrder)).toEqual(ex4ResultAlphabeticalOrder);
   });
 
   it('should return the top 20 after ordering them alphabetically.', () => {
-    const moviesArr = [
-      { title: 'aab' },
-      { title: 'bab' },
-      { title: 'acb' },
-      { title: 'aaa' },
-      { title: 'bbb' },
-      { title: 'anc' },
-      { title: 'kns' },
-      { title: 'zds' },
-      { title: 'pow' },
-      { title: 'gda' },
-      { title: 'res' },
-      { title: 'ter' },
-      { title: 'bca' },
-      { title: 'ccc' },
-      { title: 'bbt' },
-      { title: 'qas' },
-      { title: 'kmn' },
-      { title: 'frt' },
-      { title: 'afb' },
-      { title: 'agb' },
-      { title: 'apo' },
-      { title: 'poa' },
-      { title: 'cdf' },
-      { title: 'sea' },
-      { title: 'lom' },
-      { title: 'acs' },
-      { title: 'qas' },
-      { title: 'mns' },
-      { title: 'bvc' },
-      { title: 'gha' },
-      { title: 'lkj' },
-      { title: 'era' },
-      { title: 'ert' },
-      { title: 'tex' },
-      { title: 'zas' },
-      { title: 'pol' }
-    ];
-
-    expect(orderAlphabetically(moviesArr)).toEqual([
-      'aaa',
-      'aab',
-      'acb',
-      'acs',
-      'afb',
-      'agb',
-      'anc',
-      'apo',
-      'bab',
-      'bbb',
-      'bbt',
-      'bca',
-      'bvc',
-      'ccc',
-      'cdf',
-      'era',
-      'ert',
-      'frt',
-      'gda',
-      'gha'
-    ]);
+    expect(orderAlphabetically(ex4AlphabeticalOrderTop20)).toEqual(ex4ResultAlphabeticalOrderTop20);
   });
 });
 
@@ -277,24 +153,31 @@ describe('Function "orderByYear"', () => {
 
   it('should order movies with the same year by their title, alphabetically', () => {
     expect(
-      orderByYear([
-        { title: 'abc', year: 2002 },
-        { title: 'bac', year: 1982 },
-        { title: 'aab', year: 1982 }
-      ])
-    ).toEqual([
-      { title: 'aab', year: 1982 },
-      { title: 'bac', year: 1982 },
-      { title: 'abc', year: 2002 }
-    ]);
+      orderByYear(ex5OrderByYear)
+    ).toEqual(ex5ResultOrderByYear);
   });
 });
 
 // Exercise 6
-// YOUR CODE HERE. Test moviesAverageByCategory()
 describe('Function "moviesAverageByCategory"', () => {
-  it('ADD YOUR CODE IN films.spec.js file', () => {
-    expect(typeof hoursToMinutes).toBe('coffee');
+  it('should be declared', () => {
+    expect(typeof moviesAverageByCategory).toBe('function');
+  });
+
+  it('should return a number', () => {
+    expect(typeof moviesAverageByCategory(movies, 'Drama')).toBe('number');
+  });
+
+  it('should be different from NaN', () => {
+    expect(moviesAverageByCategory(movies, 'Category 1')).not.toBeNaN();
+  });
+
+  it('should return the average score of movies selecting only the category films from original movies data ', () => {
+    expect(moviesAverageByCategory(movies, 'Drama')).toBe(8.32);
+  });
+
+  it('should return -1 if the movie category does not exists in data', () => {
+    expect(moviesAverageByCategory(movies, 'not exists')).toBe(-1);
   });
 });
 
@@ -330,7 +213,22 @@ describe('Function "hoursToMinutes"', () => {
     const movieTry = [{ duration: '2h' }];
     expect(hoursToMinutes(movieTry)[0].duration).toBe(120);
   });
+
+  it('should return an array of movies with the correct duration for a 35 minutes movie', () => {
+    const movieTry = [{ duration: '35min' }];
+    expect(hoursToMinutes(movieTry)[0].duration).toBe(35);
+  });
+
+  it('should return an array of movies. If there is an error transforming duration, this will be NaN. Simple case', () => {
+    const movieTry = [{ duration: '35m' }];
+    expect(hoursToMinutes(movieTry)[0].duration).toBe(Number.NaN);
+  });
+
+  it('should return an array of movies. If there is an error transforming duration, this will be NaN. With more data', () => {
+    expect(hoursToMinutes(ex7HoursToTime)).toEqual(ex7ResultHoursToTime);
+  });
 });
+
 
 // Exercise 8
 describe('Function "bestFilmOfYear"', () => {
@@ -347,42 +245,24 @@ describe('Function "bestFilmOfYear"', () => {
   });
 
   it('should return the best film of a year, searching in an array', () => {
-    const testArr = [
-      {
-        title: 'Film1',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 6
-      },
-      {
-        title: 'Film2',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Film3',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 5
-      },
-    ];
-    expect(bestFilmOfYear(testArr, 1957)).toEqual([
-      {
-        title: 'Film2',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      }
-    ]);
+    expect(bestFilmOfYear(ex8BestFiltOfYear, 1957)).toEqual(ex8ResultBestFiltOfYear);
   });
 
+  it('should return the best film of a year, searching in an array', () => {
+    expect(bestFilmOfYear(movies, 1986)).toEqual([
+      {
+        "director": "James Cameron",
+        "duration": "2h 17min",
+        "genre": [
+          "Action",
+          "Adventure",
+          "Sci-Fi",
+          "Thriller",
+        ],
+        "score": 8.4,
+        "title": "Aliens",
+        "year": 1986,
+      },
+    ]);
+  });
 });

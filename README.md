@@ -2,85 +2,42 @@
 
 ## Introduction
 
-A company in the audiovisual sector has asked us for a web application that will allow their employees to quickly find movies from a large database they have, since the process is currently done manually.
+This is the solution for the ITAcademy Sprint 3 - Video management tool
 
-You will be in charge of setting up the core of the application: all the logic of filtering and sorting of movies. You have 2 weeks to finish, which is how long this sprint lasts.
+<br />
 
-<br>
+![alt basic screenshot from the project tests running](https://github.com/neuroflip/ITAcademy-frontend-sprint-3-movies/blob/main/etc/screenshot.png)
+
+<br />
 
 ## Requirements
 
-
-1. Clone this repo
+1. Clone the repository:
 ```bash
-$ git clone https://github.com/IT-Academy-BCN/starter-code-frontend-sprint-3-movies
+$ git clone https://github.com/neuroflip/ITAcademy-frontend-sprint-3-movies.git
 ```
 
-2. Unlink your repo from the itacademy repository
+2. Install the dependencies:
 ```bash
-$ git remote rm origin
+$ npm run install
 ```
 
-3. Link your repo to the repository you have to create in your github account
+3. Run the tests:
 ```bash
-$ git remote add origin <your repo name!>
+$ npm run test
 ```
+
+4. Run the html preview of the results:
+```bash
+$ npm run viewTest
+```
+
+5. Check the local url and port created by the tests and use it at the browser to visualize the tests execution. It is usually: http://localhost:4173/
 
 <br>
 
-## Submission
+## Considerations
 
-1. Upon completion, run the following commands:
-
-```bash
-$ git add .
-$ git commit -m "Sprint Solution"
-$ git push origin master
-```
-
-2. Create Pull Request.
-
-3. Upload the link to the virtual campus so that your mentor can correct it and give you feedback.
-
-
-
-<br>
-
-## Introduction
-
-The statement of the exercise is available on the virtual campus.
-
-<br>
-
-## Tests!
-
-
-```shell
-$ npm install
-$ npm run test:watch
-```
-
-And last, open the generated `test-results.html` file with the "Live Server" VSCode extension to see test results.
-
-Apart from the statement, you will know exactly what you are asked to do by looking at the file `tests/films.spec.js`, all tests are already defined here!
-
-<br>
-
-## Instructions
-
-You have the following indications from the frontend responsible:
-
-- It is mandatory to implement all loops in ES6 (using map, reduce, filter and sort to manipulate arrays).
-
-- As at the moment we don't consume data from a server using an API, we will work with data from the src/data.js archive. For the moment we will implement the logic using
-an array of information about 250 movies.
-
-- The implementation is about processing this array of movies, to display it as requested in each exercise.
-
-- The logic to implement will be placed in the src/films.js file.
-
-- You don't need to show the result of each function on the screen. Your goal is to pass the tests.  More information on how to program oriented to pass tests at the end of the document.
-
-- Don't forget to include the capture of the test results in the virtual campus.
-
-
+- The tests are implemented using ***vitest instead of jest***. This is a more modern testing platform and the tests run faster.
+- I'm still using an ***HTML reporter*** for easiest visual check of results. Note that executing the tests, the reporter generates a new HTML directory that should not be removed to visualize the test results.
+- Some test data arrays from tests are located inside the ***/tests/data directory***. The data is structured into a data file (regular .js file) and the result data file (the files named *.result.js). This way the tests have a more clean code structure and they are easiest to read. This way we can change independently the array data and results without modify the test files.
