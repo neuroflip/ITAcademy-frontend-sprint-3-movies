@@ -17,6 +17,8 @@ import ex5OrderByYear from './data/ex5OrderByYear.js';
 import ex5ResultOrderByYear from './data/ex5OrderByYear.result.js';
 import ex8BestFiltOfYear from './data/ex8BestFiltOfYear.js';
 import ex8ResultBestFiltOfYear from './data/ex8BestFilmOfYear.result.js';
+import ex7HoursToTime from './data/ex7HoursToTimeWithInvalidDuration.js';
+import ex7ResultHoursToTime from './data/ex7HoursToTimeWithInvalidDuration.result.js';
 
 // Exercise 1
 describe('Function "getAllDirectors"', () => {
@@ -217,9 +219,13 @@ describe('Function "hoursToMinutes"', () => {
     expect(hoursToMinutes(movieTry)[0].duration).toBe(35);
   });
 
-  it('should return an empty array of movies if there is an error transforming duration', () => {
+  it('should return an array of movies. If there is an error transforming duration, this will be NaN. Simple case', () => {
     const movieTry = [{ duration: '35m' }];
     expect(hoursToMinutes(movieTry)[0].duration).toBe(Number.NaN);
+  });
+
+  it('should return an array of movies. If there is an error transforming duration, this will be NaN. With more data', () => {
+    expect(hoursToMinutes(ex7HoursToTime)).toEqual(ex7ResultHoursToTime);
   });
 });
 
@@ -240,5 +246,23 @@ describe('Function "bestFilmOfYear"', () => {
 
   it('should return the best film of a year, searching in an array', () => {
     expect(bestFilmOfYear(ex8BestFiltOfYear, 1957)).toEqual(ex8ResultBestFiltOfYear);
+  });
+
+  it('should return the best film of a year, searching in an array', () => {
+    expect(bestFilmOfYear(movies, 1986)).toEqual([
+      {
+        "director": "James Cameron",
+        "duration": "2h 17min",
+        "genre": [
+          "Action",
+          "Adventure",
+          "Sci-Fi",
+          "Thriller",
+        ],
+        "score": 8.4,
+        "title": "Aliens",
+        "year": 1986,
+      },
+    ]);
   });
 });
