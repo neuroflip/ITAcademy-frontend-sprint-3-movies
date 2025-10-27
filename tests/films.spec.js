@@ -9,6 +9,14 @@ import ex2MoviesFromDirector from './data/ex2MoviesFromDirector.js';
 import ex2ResultMoviesFromDirector from './data/ex2MoviesFromDirector.result.js';
 import ex2ResultMoviesTotalFromDirector from './data/ex2MoviesTotalFromDirector.result.js';
 import ex3MoviesAverageFromDirector from './data/ex3MoviesAverageFromDirector.js'
+import ex4AlphabeticalOrder from './data/ex4AlphabeticalOrder.js';
+import ex4ResultAlphabeticalOrder from './data/ex4AlphabeticalOrder.result.js';
+import ex4AlphabeticalOrderTop20 from './data/ex4AlphabeticalOrderTop20.js';
+import ex4ResultAlphabeticalOrderTop20 from './data/ex4AlphabeticalOrderTop20.result.js';
+import ex5OrderByYear from './data/ex5OrderByYear.js';
+import ex5ResultOrderByYear from './data/ex5OrderByYear.result.js';
+import ex8BestFiltOfYear from './data/ex8BestFiltOfYear.js';
+import ex8ResultBestFiltOfYear from './data/ex8BestFilmOfYear.result.js';
 
 // Exercise 1
 describe('Function "getAllDirectors"', () => {
@@ -108,85 +116,11 @@ describe('Function "orderAlphabetically"', () => {
   });
 
   it('should order them alphabetically.', () => {
-    const moviesArr = [
-      { title: 'aab' },
-      { title: 'aaa' },
-      { title: 'abc' },
-      { title: 'acb' },
-      { title: 'abb' }
-    ];
-
-    expect(orderAlphabetically(moviesArr)).toEqual([
-      'aaa',
-      'aab',
-      'abb',
-      'abc',
-      'acb'
-    ]);
+    expect(orderAlphabetically(ex4AlphabeticalOrder)).toEqual(ex4ResultAlphabeticalOrder);
   });
 
   it('should return the top 20 after ordering them alphabetically.', () => {
-    const moviesArr = [
-      { title: 'aab' },
-      { title: 'bab' },
-      { title: 'acb' },
-      { title: 'aaa' },
-      { title: 'bbb' },
-      { title: 'anc' },
-      { title: 'kns' },
-      { title: 'zds' },
-      { title: 'pow' },
-      { title: 'gda' },
-      { title: 'res' },
-      { title: 'ter' },
-      { title: 'bca' },
-      { title: 'ccc' },
-      { title: 'bbt' },
-      { title: 'qas' },
-      { title: 'kmn' },
-      { title: 'frt' },
-      { title: 'afb' },
-      { title: 'agb' },
-      { title: 'apo' },
-      { title: 'poa' },
-      { title: 'cdf' },
-      { title: 'sea' },
-      { title: 'lom' },
-      { title: 'acs' },
-      { title: 'qas' },
-      { title: 'mns' },
-      { title: 'bvc' },
-      { title: 'gha' },
-      { title: 'lkj' },
-      { title: 'era' },
-      { title: 'ert' },
-      { title: 'tex' },
-      { title: 'zas' },
-      { title: 'pol' }
-    ];
-
-    expect(orderAlphabetically(moviesArr)).toEqual([
-      'aaa',
-      'aab',
-      'acb',
-      'acs',
-      'afb',
-      'agb',
-      'anc',
-      'apo',
-      'bab',
-      'bbb',
-      'bbt',
-      'bca',
-      'bvc',
-      'ccc',
-      'cdf',
-      'era',
-      'ert',
-      'frt',
-      'gda',
-      'gha'
-    ]);
+    expect(orderAlphabetically(ex4AlphabeticalOrderTop20)).toEqual(ex4ResultAlphabeticalOrderTop20);
   });
 });
 
@@ -217,16 +151,8 @@ describe('Function "orderByYear"', () => {
 
   it('should order movies with the same year by their title, alphabetically', () => {
     expect(
-      orderByYear([
-        { title: 'abc', year: 2002 },
-        { title: 'bac', year: 1982 },
-        { title: 'aab', year: 1982 }
-      ])
-    ).toEqual([
-      { title: 'aab', year: 1982 },
-      { title: 'bac', year: 1982 },
-      { title: 'abc', year: 2002 }
-    ]);
+      orderByYear(ex5OrderByYear)
+    ).toEqual(ex5ResultOrderByYear);
   });
 });
 
@@ -313,41 +239,6 @@ describe('Function "bestFilmOfYear"', () => {
   });
 
   it('should return the best film of a year, searching in an array', () => {
-    const testArr = [
-      {
-        title: 'Film1',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 6
-      },
-      {
-        title: 'Film2',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Film3',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 5
-      },
-    ];
-    expect(bestFilmOfYear(testArr, 1957)).toEqual([
-      {
-        title: 'Film2',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      }
-    ]);
+    expect(bestFilmOfYear(ex8BestFiltOfYear, 1957)).toEqual(ex8ResultBestFiltOfYear);
   });
 });
