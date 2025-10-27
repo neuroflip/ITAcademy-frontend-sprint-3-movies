@@ -227,6 +227,11 @@ describe('Function "hoursToMinutes"', () => {
   it('should return an array of movies. If there is an error transforming duration, this will be NaN. With more data', () => {
     expect(hoursToMinutes(ex7HoursToTime)).toEqual(ex7ResultHoursToTime);
   });
+
+  it('should return NaN duration if the format is not correct and cannot be converted', () => {
+    expect(hoursToMinutes([{ duration: '2 2h 24min' }])).toEqual([{ duration: Number.NaN }]);
+    expect(hoursToMinutes([{ duration: '2h2h 24min' }])).toEqual([{ duration: Number.NaN }]);
+  });
 });
 
 
