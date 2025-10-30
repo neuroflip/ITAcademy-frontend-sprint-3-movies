@@ -39,7 +39,7 @@ $ npm run viewTest
 ## Considerations
 
 - The tests are implemented using ***vitest instead of jest***. This is a more modern testing platform and the tests run faster.
-- I'm still using an ***HTML reporter*** for easiest visual check of results. Note that executing the tests, the reporter generates a new HTML directory that should not be removed to visualize the test results.
+- I'm still using an ***HTML reporter*** for easiest visual check of results. Note that executing the tests, the reporter generates a new /html directory that should not be removed to visualize the test results.
 - Some test data arrays from tests are located inside the ***/tests/data directory***. The data is structured into a data file (regular .js file) and the result data file (the files named *.result.js). This way the tests have a more clean code structure and they are easiest to read. This way we can change independently the array data and results without modify the test files.
 - Regular expression explained:
   ```
